@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthFormComponent } from './pages/auth-form/auth-form.component';
-import { UserUnauthorizedAuthGuard } from './pages/guards/user-unauthorized.guards';
+import { UserUnauthorizedAuthGuard } from './guards/user-unauthorized.guards';
 
 export const authRoutes: Routes = [
   {
