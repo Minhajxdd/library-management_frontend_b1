@@ -1,9 +1,13 @@
 import { Routes } from '@angular/router';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { AuthFormComponent } from './pages/auth-form/auth-form.component';
 
 export const authRoutes: Routes = [
   {
     path: 'register',
-    component: LoginPageComponent,
+    component: AuthFormComponent,
+  },
+  {
+    path: 'login',
+    component: AuthFormComponent,
   },
 ];
