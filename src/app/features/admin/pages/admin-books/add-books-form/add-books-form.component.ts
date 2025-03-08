@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, output } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -20,7 +20,7 @@ export class AddBooksFormComponent {
   quantityOptions = [1, 2, 3, 4, 5, 10, 20];
   itemForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private ele: ElementRef) {
     this.itemForm = this.fb.group({
       image: new FormControl<File | null>(null, {
         validators: [Validators.required, imageFileValidator],
@@ -97,5 +97,12 @@ export class AddBooksFormComponent {
     } else {
       console.error('Form is invalid. Please fix the errors.');
     }
+  }
+
+  onClose = output();
+
+  onTriggerClose() {
+    this.onClose.emit();
+    this.ele.nativeElement.remove();
   }
 }
