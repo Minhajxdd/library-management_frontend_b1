@@ -1,0 +1,116 @@
+<div id="addProductModal">
+  <div class="modal-backdrop"></div>
+  <div class="fixed inset-0 z-50 flex items-center justify-center">
+    <div class="w-full max-w-md p-6 mx-4 bg-white rounded-lg shadow-lg">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-xl font-semibold text-gray-700">Add New Product</h3>
+        <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
+      <form [formGroup]="itemForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="mb-4">
+          <label class="block mb-2 text-sm font-medium text-gray-700" for="image">Image</label>
+          <input
+            id="image"
+            (change)="onFileChange($event)"
+            type="file"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+            required
+          />
+          @if(imageError) {
+            <small class="error">{{ imageError }}</small>
+          }
+        </div>
+
+        <div class="mb-4">
+          <label class="block mb-2 text-sm font-medium text-gray-700" for="title">Title</label>
+          <input
+            id="title"
+            formControlName="title"
+            type="text"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+            required
+          />
+          @if(titleError) {
+            <small class="error">{{ titleError }}</small>
+          }
+        </div>
+
+        <div class="mb-4">
+          <label class="block mb-2 text-sm font-medium text-gray-700" for="author">Author</label>
+          <input
+            id="author"
+            formControlName="author"
+            type="text"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+            required
+          />
+          @if(authorError) {
+            <small class="error">{{ authorError }}</small>
+          }
+        </div>
+
+        <div class="mb-4">
+          <label class="block mb-2 text-sm font-medium text-gray-700" for="description">Description</label>
+          <input
+            id="description"
+            formControlName="description"
+            type="text"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+            required
+          />
+        </div>
+
+        <div class="mb-4">
+          <label class="block mb-2 text-sm font-medium text-gray-700" for="quantity">Quantity</label>
+          <select
+            id="quantity"
+            formControlName="quantity"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+          >
+          @for (option of quantityOptions; track option) {
+            <option [value]="option">
+              {{ option }}
+            </option>
+          }
+          </select>
+          @if(quantityError) {
+            <small class="error">{{ quantityError }}</small>
+          }
+        </div>
+
+        <div class="flex justify-end mt-6">
+          <button
+            type="button"
+            id="cancelBtn"
+            class="px-4 py-2 mr-2 font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 focus:outline-none focus:bg-gray-300"
+          >
+            Cancel
+          </button>
+          <button
+          [disabled]="!isFormValid"
+            type="submit"
+            class="cursor-pointer px-4 py-2 font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500"
+          >
+            Add Book
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

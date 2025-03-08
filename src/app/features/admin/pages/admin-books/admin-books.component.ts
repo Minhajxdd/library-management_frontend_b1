@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { AdminNavbarComponent } from "../../../../shared/components/navbars/admin-navbar/admin-navbar.component";
+import { AddBooksFormComponent } from "./add-books-form/add-books-form.component";
 
 @Component({
   selector: 'app-admin-books',
-  imports: [AdminNavbarComponent],
+  imports: [AdminNavbarComponent, AddBooksFormComponent],
   templateUrl: './admin-books.component.html',
   styleUrl: './admin-books.component.css'
 })
