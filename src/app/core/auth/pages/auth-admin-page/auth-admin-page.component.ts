@@ -57,7 +57,7 @@ export class AuthAdminPageComponent {
 
     const subscription = this.authAdminService.login(data).subscribe({
       next: (data: any) => {
-        if (this.authService.isAdmin()) {
+        if (!this.authService.isAdmin()) {
           this.errMsg.set('No Admin Found!');
         } else {
           sucessFullyLogged = true;

@@ -47,13 +47,13 @@ export class AuthService {
       )
       .subscribe({
         complete: () => {
-          (this.router.navigate(['login']));
+          this.router.navigate(['login']);
         },
       });
 
     this.destroyRef.onDestroy(() => {
       subscription.unsubscribe();
-    })
+    });
   }
 
   private getDecodedAccessToken(token: string) {
@@ -90,13 +90,15 @@ export class AuthService {
 
   isAdmin(): boolean {
     const accessToken = this.getCookie('access_token');
-    if(accessToken) {
+    if (accessToken) {
       const data = this.getDecodedAccessToken(accessToken)?.isAdmin;
-
-      console.log(data)
+      
+      if(data) 
+        return data;
+      else 
+        return false;
     }
 
     return false;
   }
-
 }
