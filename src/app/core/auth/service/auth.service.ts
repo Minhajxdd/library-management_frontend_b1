@@ -87,4 +87,16 @@ export class AuthService {
     }
     return false;
   }
+
+  isAdmin(): boolean {
+    const accessToken = this.getCookie('access_token');
+    if(accessToken) {
+      const data = this.getDecodedAccessToken(accessToken)?.isAdmin;
+
+      console.log(data)
+    }
+
+    return false;
+  }
+
 }
