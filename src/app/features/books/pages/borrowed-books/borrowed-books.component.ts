@@ -48,6 +48,7 @@ export class BorrowedBooksComponent implements OnInit {
   }
 
   onReturnBook(value: string) {
+    console.log(value)
     throw new Error('UnImplemneted Method');
   }
 }
