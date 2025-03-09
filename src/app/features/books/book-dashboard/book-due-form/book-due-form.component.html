@@ -31,19 +31,32 @@
             name="dueDate"
             class="w-full px-3 py-2 border border-gray-300 rounded-md"
             required
+            [min]="minDate"
           />
 
-          @if (dateForm.get('date')?.touched && dateForm.get('date')?.errors) {
+        @if (dateForm.get('date')?.touched && dateForm.get('date')?.errors) {
           <div>
             @if (dateForm.get('date')?.errors?.['required']) {
-            <span class="text-red-500">Date is required.</span>
-            } @if (dateForm.get('date')?.errors?.['dateOutOfRange']) {
-            <span class="text-red-500">
-              {{ dateForm.get('date')?.errors?.['dateOutOfRange'] }}
-            </span>
+              <span class="text-red-500">
+                Date is required.
+              </span>
             }
+            @if (dateForm.get('date')?.errors?.['pastDate']) {
+              <span class="text-red-500">
+                {{ dateForm.get('date')?.errors?.['pastDate'] }}
+              </span>
+
+            }
+            @if (dateForm.get('date')?.errors?.['dateOutOfRange']) {
+              <span class="text-red-500">
+                {{ dateForm.get('date')?.errors?.['dateOutOfRange'] }}
+              </span>
+
+            }
+              
           </div>
-          }
+        }
+          
         </div>
       
     </div>

@@ -20,41 +20,43 @@ export class BookDueFormComponent {
   private readonly ele = inject(ElementRef);
 
   dateForm: FormGroup;
-
+  minDate: string;
+  
   constructor(private fb: FormBuilder) {
+    this.minDate = new Date().toISOString().split('T')[0];
+  
     this.dateForm = this.fb.group({
-      date: ['', [Validators.required, this.dateWithin30DaysValidator]],
+      date: ['', [Validators.required, this.dateValidator]]
     });
   }
 
-  dateWithin30DaysValidator(
-    control: AbstractControl
-  ): { [key: string]: any } | null {
+  dateValidator(control: AbstractControl): { [key: string]: any } | null {
     if (!control.value) {
       return null;
     }
     const selectedDate = new Date(control.value);
-
+    
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
+    if (selectedDate < today) {
+      return { pastDate: 'Past dates are not allowed.' };
+    }
+    
     const thirtyDaysLater = new Date(today);
     thirtyDaysLater.setDate(today.getDate() + 30);
-
+    
     if (selectedDate > thirtyDaysLater) {
-      return {
-        dateOutOfRange: 'Please select a date within 30 days from today',
-      };
+      return { dateOutOfRange: 'Please select a date within 30 days from today.' };
     }
     return null;
   }
 
   onSubmit() {
-    console.log(`Called On Submit`);
     if (this.dateForm.valid) {
       console.log('Form Data:', this.dateForm.value);
     } else {
-      console.log('Form is invalid:');
+      console.log('Form is invalid:', this.dateForm.errors);
       this.dateForm.markAllAsTouched();
     }
   }
