@@ -2,6 +2,7 @@ import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { UserNavbarComponent } from '../../../shared/components/navbars/user-navbar/user-navbar.component';
 import { DahsboardSearchComponent } from './dahsboard-search/dahsboard-search.component';
 import { BookDashboardService } from './book-dashboard.service';
+import { Book } from './books.model';
 
 @Component({
   selector: 'app-book-dashboard',
@@ -9,27 +10,33 @@ import { BookDashboardService } from './book-dashboard.service';
   templateUrl: './book-dashboard.component.html',
   styleUrl: './book-dashboard.component.css',
 })
-export class BookDashboardComponent implements OnInit{
+export class BookDashboardComponent implements OnInit {
   private readonly bookDashboardService = inject(BookDashboardService);
   private readonly destoryRef = inject(DestroyRef);
 
   isLoading = signal(true);
+  books: Book[] = [];
 
   ngOnInit(): void {
     this.fetchBooks();
   }
 
   fetchBooks(page?: number, search?: string) {
-    const subscription = this.bookDashboardService.fetchBooks(page, search)
-    .subscribe({
-      next: (data) => {
-        console.log(data);
-      }
-    });
+    this.isLoading.set(true);
+
+    const subscription = this.bookDashboardService
+      .fetchBooks(page, search)
+      .subscribe({
+        next: (data) => {
+          this.books = data.data;
+        },
+        complete: () => {
+          this.isLoading.set(false);
+        },
+      });
 
     this.destoryRef.onDestroy(() => {
       subscription.unsubscribe();
-    })
-
+    });
   }
 }
