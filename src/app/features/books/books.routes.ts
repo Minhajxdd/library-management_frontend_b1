@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { BookDashboardComponent } from './book-dashboard/book-dashboard.component';
+import { BookDashboardComponent } from './pages/book-dashboard/book-dashboard.component';
 import { UserAuthorizedGuard } from '../../core/auth/guards/user.authorized.guards';
 
 export const booksRoute: Routes = [

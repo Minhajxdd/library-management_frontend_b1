@@ -1,5 +1,5 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
-import { UserNavbarComponent } from '../../../shared/components/navbars/user-navbar/user-navbar.component';
+import { UserNavbarComponent } from '../../../../shared/components/navbars/user-navbar/user-navbar.component';
 import { DahsboardSearchComponent } from './dahsboard-search/dahsboard-search.component';
 import { BookDashboardService } from './book-dashboard.service';
 import { Book } from './books.model';
