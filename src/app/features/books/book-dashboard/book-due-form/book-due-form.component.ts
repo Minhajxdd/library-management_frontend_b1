@@ -82,6 +82,9 @@ export class BookDueFormComponent {
         next: (data) => {
           console.log(data);
         },
+        complete: () => {
+          this.onToggleClose();
+        }
       });
 
     this.destoryRef.onDestroy(() => {
