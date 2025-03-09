@@ -1,4 +1,4 @@
-import { Component, ElementRef, output } from '@angular/core';
+import { Component, DestroyRef, ElementRef, inject, output } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { imageFileValidator } from './add-books.utils';
 import { ItemDetails } from './add-books.model';
+import { AddBooksFormService } from './add-books-form.service';
 
 @Component({
   selector: 'app-add-books-form',
@@ -17,6 +18,9 @@ import { ItemDetails } from './add-books.model';
   styleUrls: ['./add-books-form.component.css'],
 })
 export class AddBooksFormComponent {
+  private readonly addBooksFormService = inject(AddBooksFormService);
+  private readonly destoryRef = inject(DestroyRef);
+
   quantityOptions = [1, 2, 3, 4, 5, 10, 20];
   itemForm: FormGroup;
 
@@ -93,7 +97,19 @@ export class AddBooksFormComponent {
     this.itemForm.markAllAsTouched();
     if (this.itemForm.valid) {
       const formValue = this.itemForm.value as ItemDetails;
-      console.log('Submitted Item:', formValue);
+
+      const subscription = this.addBooksFormService.createBook(formValue)
+      .subscribe({
+        next: (data) => {
+          console.log(`This is data received!!`);
+          console.log(data);
+        }
+      });
+
+      this.destoryRef.onDestroy(() => {
+        subscription.unsubscribe();
+      })
+
     } else {
       console.error('Form is invalid. Please fix the errors.');
     }
