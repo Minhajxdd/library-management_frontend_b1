@@ -4,10 +4,11 @@ import { DahsboardSearchComponent } from './dahsboard-search/dahsboard-search.co
 import { BookDashboardService } from './book-dashboard.service';
 import { Book } from './books.model';
 import { BookBoxComponent } from "./book-box/book-box.component";
+import { BookDueFormComponent } from "./book-due-form/book-due-form.component";
 
 @Component({
   selector: 'app-book-dashboard',
-  imports: [UserNavbarComponent, DahsboardSearchComponent, BookBoxComponent],
+  imports: [UserNavbarComponent, DahsboardSearchComponent, BookBoxComponent, BookDueFormComponent],
   templateUrl: './book-dashboard.component.html',
   styleUrl: './book-dashboard.component.css',
 })
