@@ -3,10 +3,11 @@ import { UserNavbarComponent } from '../../../shared/components/navbars/user-nav
 import { DahsboardSearchComponent } from './dahsboard-search/dahsboard-search.component';
 import { BookDashboardService } from './book-dashboard.service';
 import { Book } from './books.model';
+import { BookBoxComponent } from "./book-box/book-box.component";
 
 @Component({
   selector: 'app-book-dashboard',
-  imports: [UserNavbarComponent, DahsboardSearchComponent],
+  imports: [UserNavbarComponent, DahsboardSearchComponent, BookBoxComponent],
   templateUrl: './book-dashboard.component.html',
   styleUrl: './book-dashboard.component.css',
 })
