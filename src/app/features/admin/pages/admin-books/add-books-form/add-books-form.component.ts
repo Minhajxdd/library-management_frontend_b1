@@ -1,4 +1,10 @@
-import { Component, DestroyRef, ElementRef, inject, output } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  ElementRef,
+  inject,
+  output,
+} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -9,6 +15,7 @@ import {
 import { imageFileValidator } from './add-books.utils';
 import { ItemDetails } from './add-books.model';
 import { AddBooksFormService } from './add-books-form.service';
+import { AddBookService } from './add-books-data.service';
 
 @Component({
   selector: 'app-add-books-form',
@@ -20,6 +27,7 @@ import { AddBooksFormService } from './add-books-form.service';
 export class AddBooksFormComponent {
   private readonly addBooksFormService = inject(AddBooksFormService);
   private readonly destoryRef = inject(DestroyRef);
+  private readonly addBookService = inject(AddBookService);
 
   quantityOptions = [1, 2, 3, 4, 5, 10, 20];
   itemForm: FormGroup;
@@ -98,18 +106,20 @@ export class AddBooksFormComponent {
     if (this.itemForm.valid) {
       const formValue = this.itemForm.value as ItemDetails;
 
-      const subscription = this.addBooksFormService.createBook(formValue)
-      .subscribe({
-        next: (data) => {
-          console.log(`This is data received!!`);
-          console.log(data);
-        }
-      });
+      const subscription = this.addBooksFormService
+        .createBook(formValue)
+        .subscribe({
+          next: (data) => {
+            this.addBookService.changeBook(data.data);
+          },
+          complete: () => {
+            this.onTriggerClose();
+          }
+        });
 
       this.destoryRef.onDestroy(() => {
         subscription.unsubscribe();
-      })
-
+      });
     } else {
       console.error('Form is invalid. Please fix the errors.');
     }

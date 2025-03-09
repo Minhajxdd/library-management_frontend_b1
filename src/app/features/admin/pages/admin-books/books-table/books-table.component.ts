@@ -1,7 +1,8 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { BooksTableService } from './books-table.service';
 import { Book } from './books.model';
-import { BooksTrComponent } from "./books-tr/books-tr.component";
+import { BooksTrComponent } from './books-tr/books-tr.component';
+import { AddBookService } from '../add-books-form/add-books-data.service';
 
 @Component({
   selector: 'app-books-table',
@@ -11,13 +12,22 @@ import { BooksTrComponent } from "./books-tr/books-tr.component";
 })
 export class BooksTableComponent implements OnInit {
   private readonly booksTableService = inject(BooksTableService);
-  private destoryRef = inject(DestroyRef);
+  private readonly destoryRef = inject(DestroyRef);
+  private readonly addBookService = inject(AddBookService);
 
   books: Book[] = [];
   isLoading = signal(true);
 
   ngOnInit(): void {
     this.fetchBookData();
+
+    const subscription = this.addBookService.currentBook.subscribe((data) => {
+      if (data) this.books.push(data);
+    });
+
+    this.destoryRef.onDestroy(() => {
+      subscription.unsubscribe();
+    });
   }
 
   fetchBookData() {
@@ -34,7 +44,6 @@ export class BooksTableComponent implements OnInit {
 
     this.destoryRef.onDestroy(() => {
       subscription.unsubscribe();
-    })
-
+    });
   }
 }

@@ -9,6 +9,8 @@
     </tr>
   </thead>
   <tbody id="productTableBody">
-    <tr app-books-tr [book]="books[0]"></tr>
+    @for (book of books; track book._id) {
+    <tr app-books-tr [book]="book"></tr>
+    }
   </tbody>
 </table>

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { ItemDetails } from './add-books.model';
 import { environment } from '../../../../../environments/environment';
+import { Book } from '../books-table/books.model';
 
 @Injectable({
   providedIn: 'root',
@@ -21,8 +22,12 @@ export class AddBooksFormService {
       formData.append('description', data.description);
     }
 
-    return this.http.post(`${environment.back_end}/books`, formData, {
-      withCredentials: true,
-    });
+    return this.http.post<{ data: Book }>(
+      `${environment.back_end}/books`,
+      formData,
+      {
+        withCredentials: true,
+      }
+    );
   }
 }
