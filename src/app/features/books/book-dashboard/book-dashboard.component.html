@@ -146,5 +146,8 @@
 
 
 @if (isDueModalOpen()) {
-    <app-book-due-form [bookId]="bookId"></app-book-due-form>
+    <app-book-due-form 
+    [bookId]="bookId"
+    (onClose)="onDueModalClose($event)"
+    ></app-book-due-form>
 }

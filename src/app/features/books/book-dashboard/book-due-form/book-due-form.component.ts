@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, ElementRef, inject, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-book-due-form',
@@ -8,4 +8,13 @@ import { Component, input } from '@angular/core';
 })
 export class BookDueFormComponent {
   bookId = input.required<string>()
+  onClose = output<boolean>();
+
+  private readonly ele = inject(ElementRef);
+
+  onToggleClose() {
+    this.onClose.emit(false);
+    this.ele.nativeElement.remove()
+  }
+
 }

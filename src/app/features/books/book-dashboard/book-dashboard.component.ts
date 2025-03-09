@@ -49,4 +49,8 @@ export class BookDashboardComponent implements OnInit {
     this.bookId = bookId;
     this.isDueModalOpen.set(true);
   }
+
+  onDueModalClose(value: boolean) {
+    this.isDueModalOpen.set(value);
+  }
 }
