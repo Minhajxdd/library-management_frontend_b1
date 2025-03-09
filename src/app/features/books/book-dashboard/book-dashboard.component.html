@@ -13,7 +13,11 @@
     class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
 
     @for (book of books; track book._id) {
-        <app-book-box [book]="book"></app-book-box>
+        <app-book-box
+        [book]="book"
+        (onAddBook)="onAddBook($event)"
+        
+        ></app-book-box>
     }
 
 
@@ -140,4 +144,4 @@
 
 </section>
 
-<app-book-due-form></app-book-due-form>
+<!-- <app-book-due-form></app-book-due-form> -->

@@ -41,4 +41,8 @@ export class BookDashboardComponent implements OnInit {
       subscription.unsubscribe();
     });
   }
+
+  onAddBook(bookId: string) {
+    console.log(bookId)
+  }
 }

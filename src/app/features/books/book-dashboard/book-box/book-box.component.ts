@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Book } from '../books.model';
 
 @Component({
@@ -9,4 +9,11 @@ import { Book } from '../books.model';
 })
 export class BookBoxComponent {
   book = input.required<Book>()
+  onAddBook = output<string>();
+
+
+  onBookAdd() {
+    this.onAddBook.emit(this.book()._id);
+  }
+
 }
