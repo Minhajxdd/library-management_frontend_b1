@@ -144,4 +144,7 @@
 
 </section>
 
-<!-- <app-book-due-form></app-book-due-form> -->
+
+@if (isDueModalOpen()) {
+    <app-book-due-form [bookId]="bookId"></app-book-due-form>
+}

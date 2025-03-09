@@ -42,7 +42,11 @@ export class BookDashboardComponent implements OnInit {
     });
   }
 
+  isDueModalOpen = signal(false);
+  bookId: string = '';
+
   onAddBook(bookId: string) {
-    console.log(bookId)
+    this.bookId = bookId;
+    this.isDueModalOpen.set(true);
   }
 }

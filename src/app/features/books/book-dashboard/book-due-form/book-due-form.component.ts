@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-book-due-form',
@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './book-due-form.component.css'
 })
 export class BookDueFormComponent {
-
+  bookId = input.required<string>()
 }
