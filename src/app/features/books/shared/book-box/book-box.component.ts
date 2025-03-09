@@ -1,5 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import { Book } from '../books.model';
+import { Book } from '../../pages/book-dashboard/books.model';
 
 @Component({
   selector: 'app-book-box',
@@ -9,11 +9,12 @@ import { Book } from '../books.model';
 })
 export class BookBoxComponent {
   book = input.required<Book>()
-  onAddBook = output<string>();
+  type = input.required<'borrow' | 'return'>();
+  onClickBook = output<string>();
 
 
   onBookAdd() {
-    this.onAddBook.emit(this.book()._id);
+    this.onClickBook.emit(this.book()._id);
   }
 
 }

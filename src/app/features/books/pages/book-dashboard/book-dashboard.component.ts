@@ -3,7 +3,7 @@ import { UserNavbarComponent } from '../../../../shared/components/navbars/user-
 import { DahsboardSearchComponent } from './dahsboard-search/dahsboard-search.component';
 import { BookDashboardService } from './book-dashboard.service';
 import { Book } from './books.model';
-import { BookBoxComponent } from './book-box/book-box.component';
+import { BookBoxComponent } from '../../shared/book-box/book-box.component';
 import { BookDueFormComponent } from './book-due-form/book-due-form.component';
 
 @Component({

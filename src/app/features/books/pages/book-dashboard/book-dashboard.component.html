@@ -15,7 +15,8 @@
     @for (book of books; track book._id) {
         <app-book-box
         [book]="book"
-        (onAddBook)="onAddBook($event)"
+        [type]="'borrow'"
+        (onClickBook)="onAddBook($event)"
         
         ></app-book-box>
     }
