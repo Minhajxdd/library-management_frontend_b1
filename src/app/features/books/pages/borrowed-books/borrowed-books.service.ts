@@ -10,8 +10,11 @@ export class BorrowedBooksService {
   private readonly http = inject(HttpClient);
 
   getBorrowedBooks() {
-    return this.http.get<{data: Book[]}>(`${environment.back_end}/borrow`, {
-      withCredentials: true,
-    });
+    return this.http.get<{ data: { bookId: Book }[] }>(
+      `${environment.back_end}/borrow`,
+      {
+        withCredentials: true,
+      }
+    );
   }
 }
