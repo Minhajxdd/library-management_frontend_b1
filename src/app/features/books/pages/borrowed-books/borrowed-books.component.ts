@@ -48,7 +48,33 @@ export class BorrowedBooksComponent implements OnInit {
   }
 
   onReturnBook(value: string) {
-    console.log(value)
-    throw new Error('UnImplemneted Method');
+    let removedBook: Book | null = null;
+
+    this.books = this.books.filter((book) => {
+      if (book._id === value) removedBook = book;
+      return book._id !== value;
+    });
+
+    if (removedBook) {
+      const { _id: bookId } = removedBook;
+
+      const subscription = this.borrowedBooksService.returnBook(bookId)
+      .subscribe({
+        next: (data) => {
+          console.log(data);
+        },
+        error: (err) => {
+          console.log(err)
+          if(removedBook)
+            this.books.push(removedBook);
+          removedBook = null;
+        }
+      });
+
+      this.destoryRef.onDestroy(() => {
+        subscription.unsubscribe();
+      })
+
+    }
   }
 }

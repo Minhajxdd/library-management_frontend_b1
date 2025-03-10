@@ -17,4 +17,12 @@ export class BorrowedBooksService {
       }
     );
   }
+
+  returnBook(bookId: string) {
+    return this.http.post(
+      `${environment.back_end}/transactions/return`,
+      { bookId },
+      { withCredentials: true }
+    );
+  }
 }
