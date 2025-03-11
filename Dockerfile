@@ -23,7 +23,7 @@ RUN touch /var/run/nginx.pid && \
 
 USER nginx
 
-COPY --from=build /app/dist/team-base/browser /usr/share/nginx/html/
+COPY --from=build /app/dist/library-management-frontend/browser /usr/share/nginx/html/
 
 EXPOSE 4200
 
