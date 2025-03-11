@@ -1,4 +1,4 @@
 export const environment = {
-  back_end: 'http://api.library.mohammedminhaj.blog',
+  back_end: 'https://api.library.mohammedminhaj.blog',
   production: true,
 };
